@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #f0f4f8;
+  --primary-color: #2d89ef;
+  --text-color: #333;
+  --card-bg: #ffffff;
+  --hover-color: #e1eff8;
+  --border-color: #d1e1e8;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.listas-container {
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 850px;
+}
+
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+}
+
+.lista {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.lista h2 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.lista-itens {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.lista-itens li {
+  background-color: #f1f4f7;
+  margin: 8px 0;
+  padding: 12px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lista-itens li:hover {
+  background-color: var(--hover-color);
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+}
+
+.input-area input[type="text"],
+.input-area input[type="date"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.input-area button {
+  padding: 10px 15px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.input-area button:hover {
+  background-color: #1e6bb8;
+}
+
+.botao-voltar {
+  display: inline-block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.botao-voltar:hover {
+  background-color: #1a5fc2;
+}
+
+@media (max-width: 768px) {
+  .listas-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .input-area {
+    flex-direction: column;
+  }
+
+  .input-area input,
+  .input-area button {
+    width: 100%;
+  }
+}

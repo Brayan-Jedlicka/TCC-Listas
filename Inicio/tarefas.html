@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minhas Tarefas</title>
+  <link rel="stylesheet" href="listas.css" />
+</head>
+<body>
+  <div class="listas-container">
+    <header>
+      <button id="btnVoltar" class="botao-voltar">Voltar para o Painel</button>
+      <h1>✔️ Minhas Tarefas</h1>
+      <input type="date" id="dataSelecionada" />
+    </header>
+
+    <section class="lista" id="tarefas">
+      <h2>Tarefas Diárias</h2>
+      <div class="input-area">
+        <input type="text" id="novoItem" placeholder="Nova tarefa..." />
+        <button id="adicionarItem">Adicionar</button>
+      </div>
+      <ul class="lista-itens"></ul>
+    </section>
+  </div>
+
+  <script src="listas.js"></script>
+</body>
+</html>

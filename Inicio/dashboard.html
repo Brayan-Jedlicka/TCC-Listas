@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel de Controle</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <header>
+      <h1>Bem-vindo ao Painel</h1>
+      <nav>
+        <a href="#" id="logoutButton">Sair</a>
+        <select id="themeSelector" title="Escolha o tema">
+          <option value="default">Padrão</option>
+          <option value="dark">Escuro</option>
+          <option value="pastel">Pastel</option>
+          <option value="mint">Verde Menta</option>
+          <option value="lavender">Lavanda</option>
+        </select>        
+      </nav>
+    </header>
+
+    <section class="content">
+      <h2>Selecione a Lista que deseja acessar</h2>
+      
+      <div class="cards">
+        <div class="card">
+          <h3>Tarefas</h3>
+          <p>Visualize e gerencie suas tarefas do dia a dia.</p>
+          <a href="tarefas.html" class="button">Acessar Tarefas</a>
+        </div>
+        <div class="card">
+          <h3>Compras</h3>
+          <p>Gerencie sua lista de compras.</p>
+          <a href="compras.html" class="button">Acessar Compras</a>
+        </div>
+        <div class="card">
+          <h3>Metas</h3>
+          <p>Defina e acompanhe suas metas.</p>
+          <a href="metas.html" class="button">Acessar Metas</a>
+        </div>
+        <div class="card">
+          <h3>Ideias</h3>
+          <p>Guarde suas ideias e inspirações.</p>
+          <a href="ideias.html" class="button">Acessar Ideias</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
