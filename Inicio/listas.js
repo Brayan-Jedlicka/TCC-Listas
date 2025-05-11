@@ -1,53 +1,76 @@
-function adicionarItem(lista) {
-  let inputTexto;
-  let inputData;
+function getListaKey(lista) {
+  return `lista-${lista}`;
+}
 
-  switch (lista) {
-    case 'tarefas':
-      inputTexto = document.getElementById('nova-tarefa');
-      inputData = document.getElementById('data-tarefa');
-      break;
-    case 'compras':
-      inputTexto = document.getElementById('novo-item');
-      inputData = document.getElementById('data-compra');
-      break;
-    case 'metas':
-      inputTexto = document.getElementById('nova-meta');
-      inputData = document.getElementById('data-meta');
-      break;
-    case 'ideias':
-      inputTexto = document.getElementById('nova-ideia');
-      inputData = document.getElementById('data-ideia');
-      break;
+function salvarLista(lista) {
+  const ul = document.getElementById(`${lista}-list`);
+  const itens = [];
+  ul.querySelectorAll('li').forEach(li => {
+    const textoData = li.querySelector('span').innerText;
+    itens.push(textoData);
+  });
+  localStorage.setItem(getListaKey(lista), JSON.stringify(itens));
+}
+
+function carregarLista(lista) {
+  const ul = document.getElementById(`${lista}-list`);
+  ul.innerHTML = "";
+  const dadosSalvos = localStorage.getItem(getListaKey(lista));
+  if (dadosSalvos) {
+    const itens = JSON.parse(dadosSalvos);
+    itens.forEach(item => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${item}</span>
+        <button onclick="removerItem(this, '${lista}')">Remover</button>
+      `;
+      ul.appendChild(li);
+    });
   }
+}
 
-  const texto = inputTexto.value;
+function adicionarItem(lista) {
+  const inputTexto = document.getElementById('novoItem');
+  const inputData = document.getElementById('dataSelecionada');
+
+  const texto = inputTexto.value.trim();
   const data = inputData.value;
 
   if (texto && data) {
-   
     const li = document.createElement('li');
     li.innerHTML = `
       <span>${texto} - ${data}</span>
-      <button onclick="removerItem(this)">Remover</button>
+      <button onclick="removerItem(this, '${lista}')">Remover</button>
     `;
+    document.getElementById(`${lista}-list`).appendChild(li);
 
-    const ul = document.getElementById(`${lista}-list`);
-    ul.appendChild(li);
-
-    
     inputTexto.value = '';
     inputData.value = '';
+
+    salvarLista(lista);
   } else {
     alert('Por favor, preencha todos os campos.');
   }
 }
 
-function removerItem(button) {
+function removerItem(button, lista) {
   const li = button.parentElement;
   li.remove();
+  salvarLista(lista);
 }
 
-document.getElementById("btnVoltar").addEventListener("click", function() {
-  window.location.href = "dashboard.html";
+document.addEventListener("DOMContentLoaded", () => {
+  const listaId = document.querySelector("section.lista").id;
+  carregarLista(listaId);
+
+  document.getElementById("adicionarItem").addEventListener("click", () => {
+    adicionarItem(listaId);
+  });
+
+  const voltarBtn = document.getElementById("btnVoltar");
+  if (voltarBtn) {
+    voltarBtn.addEventListener("click", function () {
+      window.location.href = "dashboard.html";
+    });
+  }
 });
