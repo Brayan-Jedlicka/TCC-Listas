@@ -8,6 +8,11 @@
 </head>
 <body>
   <script type="module">
+    import { setupThemeSelector } from './theme.js';
+    setupThemeSelector();
+  </script>
+  <script type="module" src="login.js"></script>
+  <script type="module">
    
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);

@@ -5,23 +5,179 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Remova os scripts do Firebase antigos -->
 </head>
 <body>
   <div class="login-container">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <label for="email">E-mail</label>
-      <input type="email" id="email" required placeholder="Digite seu e-mail" />
-
-      <label for="password">Senha</label>
-      <input type="password" id="password" required placeholder="Digite sua senha" />
-
-      <button type="submit" id="loginBtn">Entrar</button>
-      <button type="button" id="registerBtn">Cadastrar</button>
+    <select id="themeSelector" title="Escolha o tema">
+      <option value="default">Padrão</option>
+      <option value="dark">Escuro</option>
+      <option value="pastel">Pastel</option>
+      <option value="mint">Verde Menta</option>
+      <option value="lavender">Lavanda</option>
+    </select>
+    <form id="loginForm" class="login-form">
+      <h2 class="login-title">Login</h2>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required placeholder="Digite seu e-mail" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" required placeholder="Digite sua senha" autocomplete="current-password" />
+      </div>
+      <div class="button-group">
+        <button type="submit" id="loginBtn" class="login-btn">Entrar</button>
+        <button type="button" id="registerBtn" class="register-btn">Cadastrar</button>
+      </div>
+      <p id="error-message" class="error-message"></p>
     </form>
-    <p id="error-message" class="error-message"></p>
   </div>
+  <div class="dashboard-container">
+    <!-- Conteúdo do dashboard -->
+  </div>
+  <script type="module">
+    import { setupThemeSelector } from './theme.js';
+    setupThemeSelector();
+  </script>
   <script type="module" src="login.js"></script>
 </body>
 </html>
+
+<style>
+body {
+  background: var(--bg-color, #faf3f3);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.login-container {
+  max-width: 400px;
+  margin: 60px auto;
+  background: var(--card-bg, #fff);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+}
+.dashboard-container {
+  max-width: 900px;      /* Aumentado */
+  margin: 40px auto;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px;    /* Aumentado */
+}
+.login-title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--primary-color, #a8d8ea);
+  font-size: 2rem;
+}
+.form-group {
+  margin-bottom: 18px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #555;
+  font-weight: 500;
+}
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: #f7f7f7;
+}
+.button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.login-btn, .register-btn {
+  background: var(--primary-color, #a8d8ea);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 1rem;
+}
+.login-btn:hover, .register-btn:hover {
+  background: #6ec6e6;
+}
+.error-message {
+  color: #d32f2f;
+  text-align: center;
+  margin-top: 14px;
+  font-size: 1rem;
+}
+</style>
+
+<script>
+const themes = {
+  default: {
+    '--bg-color': '#faf3f3',
+    '--primary-color': '#a8d8ea',
+    '--primary-hover': '#6ec6e6',
+    '--card-bg': '#fff',
+    '--text-color': '#555',
+    '--text-light': '#fff'
+  },
+  dark: {
+    '--bg-color': '#23272f',
+    '--primary-color': '#222e3c',
+    '--primary-hover': '#3a4a5a',
+    '--card-bg': '#2c3440',
+    '--text-color': '#eee',
+    '--text-light': '#fff'
+  },
+  pastel: {
+    '--bg-color': '#fdf6f0',
+    '--primary-color': '#f7cac9',
+    '--primary-hover': '#f5b7b1',
+    '--card-bg': '#fff',
+    '--text-color': '#6d6875',
+    '--text-light': '#fff'
+  },
+  mint: {
+    '--bg-color': '#e6fff7',
+    '--primary-color': '#98ff98',
+    '--primary-hover': '#6ee7b7',
+    '--card-bg': '#fff',
+    '--text-color': '#227c70',
+    '--text-light': '#fff'
+  },
+  lavender: {
+    '--bg-color': '#f3f0ff',
+    '--primary-color': '#b8b5ff',
+    '--primary-hover': '#9381ff',
+    '--card-bg': '#fff',
+    '--text-color': '#5e548e',
+    '--text-light': '#fff'
+  }
+};
+
+function applyTheme(themeName) {
+  const theme = themes[themeName] || themes.default;
+  Object.entries(theme).forEach(([key, value]) => {
+    document.documentElement.style.setProperty(key, value);
+  });
+  localStorage.setItem('selectedTheme', themeName);
+}
+
+// Aplica tema salvo ao carregar
+applyTheme(localStorage.getItem('selectedTheme') || 'default');
+
+// Troca tema ao selecionar
+const themeSelector = document.getElementById('themeSelector');
+if (themeSelector) {
+  themeSelector.value = localStorage.getItem('selectedTheme') || 'default';
+  themeSelector.addEventListener('change', (e) => {
+    applyTheme(e.target.value);
+  });
+}
+</script>

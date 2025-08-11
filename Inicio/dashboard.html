@@ -7,53 +7,47 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <script type="module">
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
   <div class="dashboard-container">
-    <header>
-      <h1>Bem-vindo ao Painel</h1>
-      <nav>
-        <a href="#" id="logoutButton">Sair</a>
-        <select id="themeSelector" title="Escolha o tema">
+    <header style="background: none; box-shadow: none; padding: 0; margin-bottom: 24px;">
+      <h1 style="font-size: 1.6rem; color: var(--primary-color); margin-bottom: 8px;">Painel</h1>
+      <nav style="display: flex; gap: 10px; align-items: center;">
+        <a href="#" id="logoutButton" class="button" style="padding: 6px 14px;">Sair</a>
+        <select id="themeSelector" title="Escolha o tema" style="padding: 6px 12px;">
           <option value="default">Padrão</option>
           <option value="dark">Escuro</option>
           <option value="pastel">Pastel</option>
           <option value="mint">Verde Menta</option>
           <option value="lavender">Lavanda</option>
-        </select>        
+        </select>
       </nav>
     </header>
-
     <section class="content">
-      <h2>Selecione a Lista que deseja acessar</h2>
-      
-      <div class="cards">
-        <div class="card">
-          <h3>Tarefas</h3>
-          <p>Visualize e gerencie suas tarefas do dia a dia.</p>
-          <a href="tarefas.html" class="button">Acessar Tarefas</a>
-        </div>
-        <div class="card">
-          <h3>Compras</h3>
-          <p>Gerencie sua lista de compras.</p>
-          <a href="compras.html" class="button">Acessar Compras</a>
-        </div>
-        <div class="card">
-          <h3>Metas</h3>
-          <p>Defina e acompanhe suas metas.</p>
-          <a href="metas.html" class="button">Acessar Metas</a>
-        </div>
-        <div class="card">
-          <h3>Ideias</h3>
-          <p>Guarde suas ideias e inspirações.</p>
-          <a href="ideias.html" class="button">Acessar Ideias</a>
-        </div>
+      <h2 style="text-align:center; font-size:1.1rem; color:var(--primary-color); margin-bottom:18px;">Acesse uma lista</h2>
+      <div class="cards" style="gap:16px;">
+        <a href="tarefas.html" class="card button" style="text-align:center;">
+          <strong>Tarefas</strong>
+          <div style="font-size:0.95rem; color:var(--text-color); margin-top:4px;">Gerencie suas tarefas</div>
+        </a>
+        <a href="compras.html" class="card button" style="text-align:center;">
+          <strong>Compras</strong>
+          <div style="font-size:0.95rem; color:var(--text-color); margin-top:4px;">Lista de compras</div>
+        </a>
+        <a href="metas.html" class="card button" style="text-align:center;">
+          <strong>Metas</strong>
+          <div style="font-size:0.95rem; color:var(--text-color); margin-top:4px;">Acompanhe suas metas</div>
+        </a>
+        <a href="ideias.html" class="card button" style="text-align:center;">
+          <strong>Ideias</strong>
+          <div style="font-size:0.95rem; color:var(--text-color); margin-top:4px;">Guarde inspirações</div>
+        </a>
       </div>
     </section>
   </div>
-
-  <script src="dashboard.js"></script>
+  <script type="module">
+    import { setupThemeSelector } from './theme.js';
+    setupThemeSelector();
+  </script>
+  <script type="module" src="login.js"></script>
+  <script type="module" src="dashboard.js"></script>
 </body>
 </html>
