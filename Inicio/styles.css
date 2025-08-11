@@ -9,7 +9,6 @@ body {
   background-color: #f0f4f8;
 }
 
-
 .login-container {
   max-width: 350px;
   margin: 100px auto;
@@ -102,7 +101,7 @@ nav a:hover {
 
 .content {
   background-color: white;
-  padding: 20px;
+  padding: 100px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -110,19 +109,19 @@ nav a:hover {
 .cards {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 50px;
   flex-wrap: wrap;
 }
 
 .card {
   background-color: #fff;
-  padding: 20px;
+  padding: 80px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 45%;
+  width: 60%;
   text-align: center;
   transition: transform 0.2s;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .card:hover {
@@ -134,7 +133,7 @@ nav a:hover {
 }
 
 .card p {
-  font-size: 14px;
+  font-size: 24px;
   color: #666;
 }
 

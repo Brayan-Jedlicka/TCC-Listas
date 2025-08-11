@@ -23,6 +23,16 @@
     };
   
     // Initialize Firebase
+    /*rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}*/
+
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
   </script>
@@ -47,15 +57,6 @@
   </div>
 
   <script src="login.js"></script>
+
 </body>
 </html>
-
-*/rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-}*/

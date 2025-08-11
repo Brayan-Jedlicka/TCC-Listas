@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const validUsername = "admin";
     const validPassword = "12345";
-    const validEmail = "admin@email.com";
+    const validEmail = "admin@gmail.com";
 
     if (!validateEmail(email)) {
       errorMessage.textContent = "E-mail inválido.";

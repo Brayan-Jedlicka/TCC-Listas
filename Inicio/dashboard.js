@@ -22,15 +22,15 @@ function aplicarTema(tema) {
 
     case "dark":
       root.style.setProperty('--bg-color', '#1e1e1e');
-      root.style.setProperty('--primary-color', '#0078d7');
-      root.style.setProperty('--text-color', '#f0f0f0');
+      root.style.setProperty('--primary-color', '#4e4e4eff');
+      root.style.setProperty('--text-color', '#808080ff');
       root.style.setProperty('--card-bg', '#2b2b2b');
       break;
 
     case "pastel":
       root.style.setProperty('--bg-color', '#fef6e4');
       root.style.setProperty('--primary-color', '#f3d2c1');
-      root.style.setProperty('--text-color', '#001858');
+      root.style.setProperty('--text-color', '#001a61ff');
       root.style.setProperty('--card-bg', '#ffffff');
       break;
 
@@ -58,7 +58,6 @@ document.getElementById("themeSelector").addEventListener("change", function() {
   aplicarTema(temaSelecionado);
 });
 
-
 const temaSalvo = localStorage.getItem("temaSelecionado");
 if (temaSalvo) {
   document.getElementById("themeSelector").value = temaSalvo;
@@ -70,4 +69,3 @@ document.getElementById("themeSelector").addEventListener("change", function() {
   aplicarTema(temaSelecionado);
   localStorage.setItem("temaSelecionado", temaSelecionado);
 });
-
