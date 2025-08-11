@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
 </head>
 <body>
   <script type="module">
@@ -21,20 +23,9 @@
       appId: "1:132085348546:web:6e9012d7a8977e19f0a35b",
       measurementId: "G-6GBYZDP2PQ"
     };
-  
-    // Initialize Firebase
-    /*rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-}*/
-
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    
   </script>
   <div class="login-container">
     <h2>Login</h2>
@@ -42,16 +33,11 @@ service cloud.firestore {
       <label for="email">E-mail</label>
       <input type="email" id="email" required placeholder="Digite seu e-mail" />
 
-      <label for="username">Usuário</label>
-      <input type="text" id="username" required placeholder="Digite seu usuário" />
-
       <label for="password">Senha</label>
       <input type="password" id="password" required placeholder="Digite sua senha" />
 
-      <label for="confirm-password">Confirmar Senha</label>
-      <input type="password" id="confirm-password" required placeholder="Confirme sua senha" />
-
-      <button type="submit">Entrar</button>
+      <button type="submit" id="loginBtn">Entrar</button>
+      <button type="button" id="registerBtn">Cadastrar</button>
     </form>
     <p id="error-message" class="error-message"></p>
   </div>

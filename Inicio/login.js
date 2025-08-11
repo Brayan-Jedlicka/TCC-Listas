@@ -1,41 +1,40 @@
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+
+const auth = getAuth();
+
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const errorMessage = document.getElementById("error-message");
+  const loginBtn = document.getElementById("loginBtn");
+  const registerBtn = document.getElementById("registerBtn");
 
+  // Login
   loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
-
     const email = document.getElementById("email").value.trim();
-    const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
-    const confirmPassword = document.getElementById("confirm-password").value.trim();
 
-    const validUsername = "admin";
-    const validPassword = "12345";
-    const validEmail = "admin@gmail.com";
-
-    if (!validateEmail(email)) {
-      errorMessage.textContent = "E-mail inválido.";
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      errorMessage.textContent = "As senhas não coincidem.";
-      return;
-    }
-
-    if (username === validUsername && password === validPassword && email === validEmail) {
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("username", username);
-      localStorage.setItem("email", email);
-      window.location.href = "dashboard.html";
-    } else {
-      errorMessage.textContent = "Usuário, senha ou e-mail inválidos.";
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        localStorage.setItem("isLoggedIn", "true");
+        window.location.href = "dashboard.html";
+      })
+      .catch((error) => {
+        errorMessage.textContent = "Erro ao logar: " + error.message;
+      });
   });
 
-  function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
+  // Cadastro
+  registerBtn.addEventListener("click", () => {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        errorMessage.textContent = "Cadastro realizado com sucesso! Faça login.";
+      })
+      .catch((error) => {
+        errorMessage.textContent = "Erro ao cadastrar: " + error.message;
+      });
+  });
 });
