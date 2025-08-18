@@ -94,10 +94,8 @@ function applyTheme(themeName) {
   localStorage.setItem('selectedTheme', themeName);
 }
 
-// Aplica tema salvo ao carregar
 applyTheme(localStorage.getItem('selectedTheme') || 'default');
 
-// Troca tema ao selecionar
 const themeSelector = document.getElementById('themeSelector');
 if (themeSelector) {
   themeSelector.value = localStorage.getItem('selectedTheme') || 'default';

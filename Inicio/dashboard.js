@@ -51,7 +51,7 @@ onSnapshot(tarefasQuery, (snapshot) => {
 
 const themes = {
   default: {
-    '--bg-color': '#faf3f3',
+    '--bg-color': '#f7f7f7ff',
     '--primary-color': '#a8d8ea',
     '--primary-hover': '#6ec6e6',
     '--card-bg': '#fff',
@@ -76,7 +76,7 @@ const themes = {
   },
   mint: {
     '--bg-color': '#e6fff7',
-    '--primary-color': '#98ff98',
+    '--primary-color': '#bcffbcff',
     '--primary-hover': '#6ee7b7',
     '--card-bg': '#fff',
     '--text-color': '#227c70',

@@ -32,9 +32,6 @@
       <p id="error-message" class="error-message"></p>
     </form>
   </div>
-  <div class="dashboard-container">
-    <!-- Conteúdo do dashboard -->
-  </div>
   <script type="module">
     import { setupThemeSelector } from './theme.js';
     setupThemeSelector();
@@ -45,11 +42,12 @@
 
 <style>
 body {
-  background: var(--bg-color, #faf3f3);
+  background: var(--bg-color, #f3f8fa);
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
+
 .login-container {
   max-width: 400px;
   margin: 60px auto;
@@ -58,14 +56,7 @@ body {
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 32px 24px;
 }
-.dashboard-container {
-  max-width: 900px;      /* Aumentado */
-  margin: 40px auto;
-  background: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  padding: 32px 24px;    /* Aumentado */
-}
+
 .login-title {
   text-align: center;
   margin-bottom: 24px;
@@ -169,10 +160,8 @@ function applyTheme(themeName) {
   localStorage.setItem('selectedTheme', themeName);
 }
 
-// Aplica tema salvo ao carregar
 applyTheme(localStorage.getItem('selectedTheme') || 'default');
 
-// Troca tema ao selecionar
 const themeSelector = document.getElementById('themeSelector');
 if (themeSelector) {
   themeSelector.value = localStorage.getItem('selectedTheme') || 'default';
