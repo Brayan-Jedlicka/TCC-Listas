@@ -41,12 +41,33 @@
           <div style="font-size:0.95rem; color:var(--text-color); margin-top:4px;">Guarde inspirações</div>
         </a>
       </div>
+
+      <section id="user-lists-section" style="max-width:980px;margin:20px auto;">
+        <h2 style="text-align:center; font-size:1.1rem; color:var(--primary-color); margin-bottom:12px;">Minhas Listas</h2>
+        <div class="lists-controls" style="display:flex;justify-content:center;gap:8px;margin-bottom:12px;align-items:center;">
+          <label for="listTypeSelector" class="visually-hidden">Tipo de lista</label>
+          <select id="listTypeSelector" title="Tipo de lista" style="padding:8px;border-radius:6px;">
+            <option value="generic">Genérica</option>
+            <option value="tasks">Tarefas</option>
+            <option value="ideas">Ideias</option>
+            <option value="shopping">Compras</option>
+            <option value="goals">Metas</option>
+          </select>
+          <input id="newListTitle" placeholder="Nova lista (título)" style="padding:8px;border-radius:6px;min-width:220px" />
+          <button id="addListBtn" class="button" style="padding:8px 12px;">Criar lista</button>
+        </div>
+
+        <div id="listsContainer" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px"></div>
+        <p id="error-message" class="error-message" style="text-align:center;margin-top:12px;"></p>
+      </section>
     </section>
   </div>
+
   <script type="module">
     import { setupThemeSelector } from './theme.js';
     setupThemeSelector();
   </script>
+
   <script type="module" src="login.js"></script>
   <script type="module" src="dashboard.js"></script>
 </body>
