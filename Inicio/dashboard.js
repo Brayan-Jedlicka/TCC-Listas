@@ -157,48 +157,69 @@ function renderLists(lists=[]){
   if (!listsContainer) return;
   listsContainer.innerHTML = '';
   (lists||[]).forEach(list=>{
-    const el = document.createElement('div');
-    el.className = 'list-card';
+    const el = document.createElement('article');
+    el.className = 'card list-card';
     el.dataset.listId = list.id;
+
     el.innerHTML = `
-      <div class="list-header">
-        <input class="list-title" value="${escapeHtml(list.title||'')}" />
-        <div class="list-type-label" style="margin-left:8px;font-size:0.9rem;color:var(--muted)">${escapeHtml(list.type||'genérica')}</div>
-        <button class="delete-list-btn" title="Excluir">Excluir</button>
-      </div>
-      <div class="list-items"></div>
-      <div class="add-item-row">
-        <input class="new-item-input" placeholder="Novo item" />
-        <button class="add-item-btn">Adicionar</button>
+      <div class="list-card-inner" style="display:flex;flex-direction:column;gap:8px;padding:14px;">
+        <div class="list-header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <div style="display:flex;align-items:center;gap:8px;flex:1">
+            <input class="list-title" value="${escapeHtml(list.title||'')}" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)"/>
+            <div class="list-type-label" style="font-size:0.9rem;color:var(--muted);min-width:86px;text-align:right">${escapeHtml(list.type||'genérica')}</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button class="button small delete-list-btn" title="Excluir">Excluir</button>
+          </div>
+        </div>
+
+        <div class="list-items-wrapper" style="max-height:240px;overflow:auto;">
+          <ul class="list-items" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;"></ul>
+        </div>
+
+        <div class="add-item-row" style="display:flex;gap:8px;align-items:center;">
+          <input class="new-item-input" placeholder="Novo item" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)"/>
+          <button class="button primary add-item-btn">Adicionar</button>
+        </div>
       </div>
     `;
+
     const itemsEl = el.querySelector('.list-items');
 
     function renderItems(items){
       itemsEl.innerHTML = '';
       (items||[]).forEach((it, idx)=>{
-        const itemEl = document.createElement('div');
+        const itemEl = document.createElement('li');
         itemEl.className = 'list-item';
+        itemEl.style.display = 'flex';
+        itemEl.style.alignItems = 'center';
+        itemEl.style.justifyContent = 'space-between';
+        itemEl.style.gap = '8px';
+        itemEl.style.padding = '6px 8px';
+        itemEl.style.borderRadius = '6px';
+        itemEl.style.background = 'var(--card-bg)';
+        itemEl.style.border = '1px solid rgba(0,0,0,0.04)';
+
         if (list.type==='tasks'){
           const done = it && it.done ? 'checked' : '';
-          itemEl.innerHTML = `<label style="display:flex;align-items:center;gap:8px"><input type="checkbox" class="task-checkbox" data-idx="${idx}" ${done}/> <span class="${it && it.done ? 'done' : ''}">${escapeHtml(it.text||'')}</span></label><button class="remove-item-btn" data-idx="${idx}">x</button>`;
+          itemEl.innerHTML = `<label style="display:flex;align-items:center;gap:8px;flex:1"><input type="checkbox" class="task-checkbox" data-idx="${idx}" ${done}/> <span class="${it && it.done ? 'done' : ''}">${escapeHtml(it.text||'')}</span></label><button class="button small remove-item-btn" data-idx="${idx}">x</button>`;
         } else if (list.type==='shopping'){
           const qty = it && it.qty != null ? it.qty : 1;
-          itemEl.innerHTML = `<span>${escapeHtml(it.text||'')}</span><div style="display:flex;gap:8px;align-items:center"><input class="shop-qty" type="number" min="1" value="${qty}" data-idx="${idx}" style="width:64px;padding:6px;border-radius:6px"/><button class="remove-item-btn" data-idx="${idx}">x</button></div>`;
+          itemEl.innerHTML = `<div style="display:flex;align-items:center;gap:8px;flex:1"><span>${escapeHtml(it.text||'')}</span></div><div style="display:flex;gap:8px;align-items:center"><input class="shop-qty" type="number" min="1" value="${qty}" data-idx="${idx}" style="width:64px;padding:6px;border-radius:6px"/><button class="button small remove-item-btn" data-idx="${idx}">x</button></div>`;
         } else if (list.type==='ideas'){
-          itemEl.innerHTML = `<div style="flex:1"><div>${escapeHtml(it.text||'')}</div><div style="font-size:0.85rem;color:var(--muted)">${escapeHtml(it.note||'')}</div></div><button class="remove-item-btn" data-idx="${idx}">x</button>`;
+          itemEl.innerHTML = `<div style="flex:1"><div>${escapeHtml(it.text||'')}</div><div style="font-size:0.85rem;color:var(--muted)">${escapeHtml(it.note||'')}</div></div><button class="button small remove-item-btn" data-idx="${idx}">x</button>`;
         } else if (list.type==='goals'){
           const progress = it && it.progress != null ? it.progress : 0;
-          itemEl.innerHTML = `<div style="flex:1"><div>${escapeHtml(it.text||'')}</div><div style="font-size:0.85rem;color:var(--muted)">Progresso: ${progress}%</div></div><button class="remove-item-btn" data-idx="${idx}">x</button>`;
+          itemEl.innerHTML = `<div style="flex:1"><div>${escapeHtml(it.text||'')}</div><div style="font-size:0.85rem;color:var(--muted)">Progresso: ${progress}%</div></div><button class="button small remove-item-btn" data-idx="${idx}">x</button>`;
         } else {
-          itemEl.innerHTML = `${escapeHtml(it)} <button class="remove-item-btn" data-idx="${idx}">x</button>`;
+          itemEl.innerHTML = `<div style="flex:1">${escapeHtml(it)}</div><button class="button small remove-item-btn" data-idx="${idx}">x</button>`;
         }
         itemsEl.appendChild(itemEl);
       });
     }
 
     renderItems(list.items);
- 
+
     el.querySelector('.add-item-btn')?.addEventListener('click', async ()=>{
       const input = el.querySelector('.new-item-input');
       const v = input ? sanitizeItem(input.value) : '';
@@ -254,7 +275,7 @@ function renderLists(lists=[]){
 
 onAuthStateChanged(auth, async (user) => {
   console.log('onAuthStateChanged fired:', user ? { uid: user.uid, email: user.email } : null);
-  try { setupThemeSelector(); } catch(e){ /* silent */ }
+  try { setupThemeSelector(); } catch(e){}
   if (user){
     try {
       userDocRef = await ensureUserDoc(user.uid, user.email);

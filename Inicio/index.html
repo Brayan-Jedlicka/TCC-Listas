@@ -41,42 +41,8 @@
     import { setupThemeSelector } from './theme.js';
     setupThemeSelector();
   </script>
+  <script type="module" src="firebase.js"></script>
   <script type="module" src="login.js"></script>
-  <script>
-    const loginForm = document.getElementById('loginForm');
-    const loginBtn = document.getElementById('loginBtn');
-    const loginBtnText = document.getElementById('loginBtnText');
-    const loginSpinner = document.getElementById('loginSpinner');
-    const errorMessage = document.getElementById('error-message');
-    const successMessage = document.getElementById('success-message');
-
-    loginForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      loginBtn.disabled = true;
-      loginBtnText.textContent = 'Entrando...';
-      loginSpinner.classList.remove('visually-hidden');
-      errorMessage.textContent = '';
-      successMessage.classList.add('visually-hidden');
-
-      setTimeout(() => {
-        const email = document.getElementById('email').value;
-        if (!email.includes('@')) {
-          errorMessage.textContent = 'E-mail inválido!';
-          errorMessage.classList.add('shake');
-          setTimeout(() => errorMessage.classList.remove('shake'), 500);
-          loginBtn.disabled = false;
-          loginBtnText.textContent = 'Entrar';
-          loginSpinner.classList.add('visually-hidden');
-        } else {
-          errorMessage.textContent = '';
-          successMessage.classList.remove('visually-hidden');
-          loginBtn.disabled = false;
-          loginBtnText.textContent = 'Entrar';
-          loginSpinner.classList.add('visually-hidden');
-        }
-      }, 1200);
-    });
-  </script>
 </body>
 </html>
 
